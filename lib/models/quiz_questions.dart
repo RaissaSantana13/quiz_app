@@ -6,4 +6,10 @@ class QuizQuestion {
   final String text; 
   final List<String> answers;
   final Difficulty difficulty;
+
+  List<String> getShuffledAwnswers(){
+    final shuffledList =  List.of(answers);
+    shuffledList.shuffle();
+    return shuffledList;
+  }
 }
