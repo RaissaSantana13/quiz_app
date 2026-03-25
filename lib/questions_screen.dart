@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_flutter/answer_button.dart';
 import 'package:quiz_app_flutter/data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+  final void Function(String answer) onSelectAnswer;
+
   @override
   State<QuestionsScreen> createState() {
     return _QuestionsScreenState();
@@ -11,16 +15,16 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
-  void answerQuestion() {
-  setState(() {
-    if (currentQuestionIndex < 9 && currentQuestionIndex < questions.length - 1) {
-      currentQuestionIndex++;
-    } else {
-      // O que acontece após a 10ª pergunta? 
-      // Exemplo: Voltar para o início ou navegar para tela de resultados 
-    }
-  });
-}
+
+  void answerQuestion(String selectedAnswers) {
+    setState(() {
+      widget.onSelectAnswer('...');
+      if (currentQuestionIndex < 9 &&
+          currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +40,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           children: [
             Text(
               currentQuestion.text,
-              style: TextStyle(
-                color: Colors.white,
+              style: GoogleFonts.lato(
+                color: Colors.white.withOpacity(0.85),
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
-                fontSize: 18,
               ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30),
             ...currentQuestion.getShuffledAwnswers().map((answer) {
-              return AnswerButton(answerText: answer, onTap: answerQuestion ,);
+              return AnswerButton(answerText: answer, onTap: () {
+                answerQuestion(answer);
+              });
             }),
           ],
         ),
