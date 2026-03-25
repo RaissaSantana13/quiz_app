@@ -37,28 +37,36 @@ class ResultsScreen extends StatelessWidget {
       return data['user_answer'] == data['correct_answer'];
     }).length;
 
-    return SizedBox(
-      width: double.infinity,
+    return Center(
       child: Container(
         margin: const EdgeInsets.all(20),
         child: Column(
+          mainAxisSize: MainAxisSize.min, // 🔥 IMPORTANTE
           children: [
             Text(
               'You answered $correctAnswers out of ${questions.length} correctly!',
-              style: const TextStyle(color: Colors.white, fontSize: 20),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
               textAlign: TextAlign.center,
             ),
+
             const SizedBox(height: 30),
-            Expanded(
-              child: SingleChildScrollView(
-                child: QuestionsSummary(summaryData),
-              ),
+
+            // ✅ CENTRALIZADO + TAMANHO FIXO
+            SizedBox(
+              height: 400,
+              width: 350,
+              child: QuestionsSummary(summaryData),
             ),
+
             const SizedBox(height: 20),
+
             ElevatedButton(
               onPressed: onRestart,
               child: const Text('Restart Quiz!'),
-            )
+            ),
           ],
         ),
       ),
