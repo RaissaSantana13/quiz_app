@@ -41,7 +41,7 @@ class ResultsScreen extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(20),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // 🔥 IMPORTANTE
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'You answered $correctAnswers out of ${questions.length} correctly!',
@@ -53,8 +53,6 @@ class ResultsScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 30),
-
-            // ✅ CENTRALIZADO + TAMANHO FIXO
             SizedBox(
               height: 400,
               width: 350,
