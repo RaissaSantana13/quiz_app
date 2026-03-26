@@ -21,28 +21,66 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
+  String? selectedAnswer;
+  late List<String> currentShuffledAnswers;
+  @override
+  void initState() {
+    super.initState();
 
-  void answerQuestion(String selectedAnswer) {
-    widget.onSelectAnswer(selectedAnswer);
+    currentShuffledAnswers = widget.questions[currentQuestionIndex]
+        .getShuffledAwnswers();
+  }
 
+  void answerQuestion(String answer) async {
     setState(() {
-      if (currentQuestionIndex < widget.questions.length - 1) {
-        currentQuestionIndex++;
-      }
+      selectedAnswer = answer;
     });
+
+    await Future.delayed(const Duration(milliseconds: 1000));
+
+    widget.onSelectAnswer(answer);
+
+    if (mounted && currentQuestionIndex < widget.questions.length - 1) {
+      setState(() {
+        selectedAnswer = null;
+        currentQuestionIndex++;
+        currentShuffledAnswers = widget.questions[currentQuestionIndex]
+            .getShuffledAwnswers();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final currentQuestion = widget.questions[currentQuestionIndex];
+    final correctAnswer = currentQuestion.answers[0];
 
     return SizedBox(
       width: double.infinity,
       child: Container(
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            LinearProgressIndicator(
+              value: (currentQuestionIndex + 1) / widget.questions.length,
+              backgroundColor: Colors.white24,
+              color: Colors.amber,
+            ),
+            const SizedBox(height: 20),
+
+            Text(
+              'Question ${currentQuestionIndex + 1} of ${widget.questions.length}',
+              style: GoogleFonts.lato(
+                color: Colors.white70,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+
             Text(
               currentQuestion.text,
               style: GoogleFonts.lato(
@@ -53,12 +91,29 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
-            ...currentQuestion.getShuffledAwnswers().map((answer) {
+            ...currentShuffledAnswers.map((answer) {
+              Color? buttonColor;
+              if (selectedAnswer != null) {
+                if (answer == correctAnswer) {
+                  buttonColor = Colors.green;
+                } else if (answer == selectedAnswer) {
+                  buttonColor = Colors.red;
+                } else {
+                  buttonColor = const Color.fromARGB(
+                    255,
+                    33,
+                    1,
+                    95,
+                  ).withOpacity(0.5);
+                }
+              }
+
               return AnswerButton(
                 answerText: answer,
-                onTap: () {
-                  answerQuestion(answer);
-                },
+                backgroundColor: buttonColor,
+                onTap: selectedAnswer == null
+                    ? () => answerQuestion(answer)
+                    : () {},
               );
             }),
           ],
