@@ -19,19 +19,17 @@
 ## 🚀 Funcionalidades Principais
 
 * **Fluxo de Quiz Completo:** Navegação intuitiva entre telas de início, perguntas e resultados.
-* **Perguntas Dinâmicas:** Sistema que carrega e filtra perguntas para cada rodada.
 * **Seleção de Respostas:** Interface interativa para escolha de alternativas com feedback imediato.
 * **Resumo de Performance:** Exibição detalhada das respostas escolhidas versus as corretas ao final do quiz.
 * **Reinicialização Rápida:** Opção de recomeçar o quiz instantaneamente para uma nova tentativa.
 * **Design Imersivo:** Fundo com gradiente multi-cores e tipografia refinada via Google Fonts.
-* * **Foco Educacional:** Desenvolvido especificamente para ajudar desenvolvedores a praticarem conceitos de Flutter e Dart.
+* **Foco Educacional:** Desenvolvido especificamente para ajudar desenvolvedores a praticarem conceitos de Flutter e Dart.
 * **Sistema de Dificuldade Inteligente:** A cada rodada, o app realiza um sorteio dinâmico para garantir um desafio equilibrado:
     * **5 perguntas fáceis**
     * **3 perguntas médias**
     * **2 perguntas difíceis**
 * **Respostas Embaralhadas:** Para evitar a memorização por posição, as alternativas de cada pergunta são embaralhadas aleatoriamente em todas as partidas.
-* **Resumo de Performance:** Análise detalhada comparando as respostas escolhidas com as corretas ao final do quiz.
-
+  
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -78,7 +76,6 @@ Projeto desenvolvido com foco em lógica de estados no Flutter e criação de in
 ## 🚀 Key Features
 
 * **Complete Quiz Flow:** Intuitive navigation between start, questions, and results screens.
-* **Dynamic Questions:** System that loads and filters questions for each round.
 * **Answer Selection:** Interactive interface for choosing alternatives with immediate feedback.
 * **Performance Summary:** Detailed display of chosen versus correct answers at the end of the quiz.
 * **Quick Restart:** Option to instantly restart the quiz for a new attempt.
@@ -89,7 +86,7 @@ Projeto desenvolvido com foco em lógica de estados no Flutter e criação de in
     * **3 medium questions**
     * **2 hard questions**
 * **Shuffled Answers:** To prevent memorization by position, the alternatives for each question are randomly shuffled in every game.
-* **Performance Summary:** Detailed analysis comparing chosen answers with correct ones at the end of the quiz.
+
 
 ---
 
